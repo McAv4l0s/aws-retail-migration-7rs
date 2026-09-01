@@ -1,0 +1,9 @@
+application_id,application_name,business_capability,criticality,strategy,owner,rto_minutes,rpo_minutes,wave,decision_status
+APP-001,Legacy catalog batch,Product catalog,medium,Retire,Merchandising,1440,1440,1,approved
+APP-002,Store POS,Store sales,critical,Retain,Store Operations,240,60,future,conditional
+APP-003,Auxiliary ERP,Finance and fulfillment,high,Rehost,Enterprise Apps,120,30,2,approved
+APP-004,VMware integration cluster,Enterprise integration,high,Relocate,Integration Team,120,30,4,conditional
+APP-005,On-premises CRM,Customer service,medium,Repurchase,Customer Operations,480,1440,4,conditional
+APP-006,Inventory database,Inventory availability,critical,Replatform,Supply Chain,60,15,3,approved
+APP-007,Checkout monolith,Digital sales,critical,Refactor,Digital Product,30,5,5,conditional
+
