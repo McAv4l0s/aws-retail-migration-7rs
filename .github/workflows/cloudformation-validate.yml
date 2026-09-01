@@ -1,0 +1,26 @@
+name: cloudformation-validate
+
+on:
+  pull_request:
+    paths:
+      - "infra/cloudformation/**"
+      - ".github/workflows/cloudformation-validate.yml"
+  push:
+    branches: [main]
+    paths:
+      - "infra/cloudformation/**"
+
+permissions:
+  contents: read
+
+jobs:
+  cfn-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install cfn-lint
+      - run: cfn-lint infra/cloudformation/retail-migration-foundation.yaml
+
