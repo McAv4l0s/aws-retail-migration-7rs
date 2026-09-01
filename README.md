@@ -6,7 +6,7 @@ Proyecto de trabajo que documenta la evaluación, movilización y migración de 
 |---|---|
 | Línea base del programa | Mayo de 2026 |
 | Inicio planificado | 4 de mayo de 2026 |
-| Fin de estabilización | 31 de julio de 2026 |
+| Fin de estabilización | 26 de junio de 2026 |
 | Método | 7 R, AWS Well-Architected y migración por olas |
 
 ## Resumen ejecutivo
@@ -72,10 +72,10 @@ La línea base del plan fue establecida en **mayo de 2026**. Las olas separan la
 | 0 | 4–8 mayo 2026 | Landing zone, red, identidad y logs | Foundation | Controles y conectividad aprobados |
 | 1 | 11–15 mayo 2026 | Retiro del catálogo y carga piloto | Retire | Reconciliación y soporte estabilizado |
 | 2 | 18–22 mayo 2026 | ERP auxiliar hacia EC2 mediante MGN | Rehost | UAT, rendimiento y rollback aprobados |
-| 3 | 25 mayo–5 junio 2026 | Base de inventario hacia Amazon RDS | Replatform | Integridad, RPO y rendimiento aprobados |
-| 4 | 8–19 junio 2026 | CRM SaaS e integraciones VMware | Repurchase / Relocate | Contratos, datos y operación aprobados |
-| 5 | 22 junio–17 julio 2026 | Modernización progresiva de checkout | Refactor | SLO y despliegue progresivo aprobados |
-| Estabilización | 20–31 julio 2026 | Hypercare, costos, seguridad y cierre | Optimize | KPIs y aceptación ejecutiva |
+| 3 | 25–29 mayo 2026 | Base de inventario hacia Amazon RDS | Replatform | Integridad, RPO y rendimiento aprobados |
+| 4 | 1–12 junio 2026 | CRM SaaS e integraciones VMware | Repurchase / Relocate | Contratos, datos y operación aprobados |
+| 5 | 15–22 junio 2026 | Modernización progresiva de checkout | Refactor | SLO y despliegue progresivo aprobados |
+| Estabilización | 23–26 junio 2026 | Hypercare, costos, seguridad y cierre | Optimize | KPIs y aceptación ejecutiva |
 
 El calendario detallado, los gates comunes y el criterio de rollback están en [`docs/06-plan-de-olas.md`](docs/06-plan-de-olas.md).
 
