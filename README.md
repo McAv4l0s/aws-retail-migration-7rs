@@ -70,6 +70,7 @@ El programa sigue cuatro movimientos: descubrir y evaluar, preparar la plataform
 - [`docs/09-kpis-y-evidencia.md`](docs/09-kpis-y-evidencia.md): trazabilidad de resultados.
 - [`data/application-portfolio.csv`](data/application-portfolio.csv): inventario de decisiones.
 - [`infra/terraform`](infra/terraform): landing zone de laboratorio como código.
+- [`infra/cloudformation`](infra/cloudformation): stack desplegable equivalente y guía de operación.
 
 ## Cómo validar la infraestructura
 
@@ -81,6 +82,18 @@ terraform validate
 ```
 
 El código está diseñado para revisión y laboratorio. Antes de aplicar recursos debe configurarse una cuenta sandbox, límites de presupuesto, región permitida y controles de seguridad.
+
+### Despliegue con CloudFormation
+
+```bash
+aws cloudformation deploy \
+  --stack-name retail-migration-foundation-dev \
+  --template-file infra/cloudformation/retail-migration-foundation.yaml \
+  --parameter-overrides ProjectName=retail-migration-7rs Environment=dev \
+  --capabilities CAPABILITY_IAM
+```
+
+La plantilla evita NAT Gateway y recursos de cómputo para controlar el costo inicial. Consulta [`infra/cloudformation/README.md`](infra/cloudformation/README.md) antes de crear o eliminar el stack.
 
 ## Gobierno de información
 
