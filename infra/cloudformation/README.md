@@ -1,4 +1,4 @@
-# CloudFormation: base del laboratorio de migración
+# CloudFormation: 
 
 La plantilla `retail-migration-foundation.yaml` crea una base desplegable para el caso retail:
 
