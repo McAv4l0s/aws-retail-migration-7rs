@@ -14,6 +14,18 @@
 | 5 | 15–22 junio | Refactor checkout | Mejorar escala y velocidad | SLO y despliegue progresivo aprobados |
 | Estabilización | 23–26 junio | Hypercare, costos, seguridad y cierre | Confirmar beneficios y operación | KPIs y aceptación ejecutiva |
 
+## Ventanas de cutover
+
+| ID | Wave | Ventana | Cambio de servicio |
+|---|---|---|---|
+| CO-01 | 1 | 15 mayo, 21:00–23:00 | Retiro del catálogo heredado |
+| CO-02 | 2 | 22 mayo, 22:00–23 mayo, 02:00 | Cutover del ERP mediante MGN |
+| CO-03 | 3 | 29 mayo, 22:00–30 mayo, 03:00 | Inventario hacia Amazon RDS |
+| CO-04 | 4 | 12 junio, 21:00–13 junio, 02:00 | CRM SaaS e integraciones trasladadas |
+| CO-05 | 5 | 22 junio, 22:00–23 junio, 01:00 | Tráfico progresivo al nuevo checkout |
+
+La operación detallada, los checkpoints y los umbrales de reversa están en [`10-plan-de-cutover.md`](10-plan-de-cutover.md).
+
 ## Gates comunes
 
 - Go/no-go firmado por negocio, aplicación, infraestructura y seguridad.
