@@ -23,6 +23,8 @@ Este runbook aplica al ERP auxiliar clasificado como **Rehost**. MGN replica ser
 
 ## Cutover
 
+**Ventana CO-02:** 22 de mayo de 2026, 22:00–23 de mayo, 02:00, zona `America/Mexico_City`.
+
 1. Iniciar freeze y mesa de control.
 2. Confirmar backup, replicación saludable y ausencia de lag.
 3. Detener servicios que generan escrituras.
@@ -32,7 +34,10 @@ Este runbook aplica al ERP auxiliar clasificado como **Rehost**. MGN replica ser
 7. Observar durante la ventana de estabilización.
 8. Finalizar el cutover solo después de la aceptación.
 
+Los criterios go/no-go y el límite temporal de rollback se definen en [`10-plan-de-cutover.md`](10-plan-de-cutover.md).
+
+La operación completa de source servers, applications, waves, launch history, connectors e import/export se documenta en [`11-operacion-aws-transform-mgn.md`](11-operacion-aws-transform-mgn.md).
+
 ## Reversa
 
 La reversa se ejecuta antes de finalizar MGN: detener escrituras en el destino, restaurar el enrutamiento, iniciar la fuente, validar integridad y documentar diferencias. El detalle de reconciliación depende de las transacciones aceptadas durante la ventana.
-
