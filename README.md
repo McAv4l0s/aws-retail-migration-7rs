@@ -79,6 +79,20 @@ La línea base del plan fue establecida en **mayo de 2026**. Las olas separan la
 
 El calendario detallado, los gates comunes y el criterio de rollback están en [`docs/06-plan-de-olas.md`](docs/06-plan-de-olas.md).
 
+## Calendario de cutovers
+
+Las waves indican periodos de trabajo; los cutovers son las ventanas específicas en las que cambia el servicio, los datos o el tráfico.
+
+| Cutover | Wave | Fecha y ventana | Carga | Movimiento |
+|---|---|---|---|---|
+| CO-01 | 1 | 15 mayo, 21:00–23:00 | Catálogo heredado | Retire |
+| CO-02 | 2 | 22 mayo, 22:00–23 mayo, 02:00 | ERP auxiliar | Rehost con MGN |
+| CO-03 | 3 | 29 mayo, 22:00–30 mayo, 03:00 | Inventario | Replatform a RDS |
+| CO-04 | 4 | 12 junio, 21:00–13 junio, 02:00 | CRM e integraciones | Repurchase / Relocate |
+| CO-05 | 5 | 22 junio, 22:00–23 junio, 01:00 | Checkout | Refactor progresivo |
+
+Todas las ventanas utilizan la zona horaria `America/Mexico_City`. Los criterios go/no-go, umbrales de rollback, roles y checkpoints se encuentran en [`docs/10-plan-de-cutover.md`](docs/10-plan-de-cutover.md).
+
 ## Contenido del repositorio
 
 - [`docs/00-resumen-ejecutivo.md`](docs/00-resumen-ejecutivo.md): narrativa para dirección.
@@ -91,9 +105,11 @@ El calendario detallado, los gates comunes y el criterio de rollback están en [
 - [`docs/07-runbook-mgn.md`](docs/07-runbook-mgn.md): prueba y cutover del rehost.
 - [`docs/08-riesgos-y-raci.md`](docs/08-riesgos-y-raci.md): riesgos, responsables y controles.
 - [`docs/09-kpis-y-evidencia.md`](docs/09-kpis-y-evidencia.md): trazabilidad de resultados.
+- [`docs/10-plan-de-cutover.md`](docs/10-plan-de-cutover.md): ventanas, responsables y reversa.
+- [`docs/11-operacion-aws-transform-mgn.md`](docs/11-operacion-aws-transform-mgn.md): source servers, applications, waves, global view, history, connectors e import/export.
 - [`data/application-portfolio.csv`](data/application-portfolio.csv): inventario de decisiones.
-- [`infra/terraform`](infra/terraform): landing zone de laboratorio como código.
-- [`infra/cloudformation`](infra/cloudformation): stack desplegable equivalente y guía de operación.
+- [`data/mgn-import-wave-02.csv`](data/mgn-import-wave-02.csv): ejemplo de inventario CSV para MGN.
+- [`infra/terraform`](infra/terraform): landing zone desplegable como código.
 
 ## Cómo validar la infraestructura
 
@@ -106,17 +122,16 @@ terraform validate
 
 El código está diseñado para revisión y laboratorio. Antes de aplicar recursos debe configurarse una cuenta sandbox, límites de presupuesto, región permitida y controles de seguridad.
 
-### Despliegue con CloudFormation
+### Despliegue con Terraform
 
 ```bash
-aws cloudformation deploy \
-  --stack-name retail-migration-foundation-dev \
-  --template-file infra/cloudformation/retail-migration-foundation.yaml \
-  --parameter-overrides ProjectName=retail-migration-7rs Environment=dev \
-  --capabilities CAPABILITY_IAM
+cd infra/terraform
+terraform init
+terraform plan -out=c2kmig.tfplan
+terraform apply c2kmig.tfplan
 ```
 
-La plantilla evita NAT Gateway y recursos de cómputo para controlar el costo inicial. Consulta [`infra/cloudformation/README.md`](infra/cloudformation/README.md) antes de crear o eliminar el stack.
+La configuración evita NAT Gateway y recursos de cómputo para controlar el costo inicial. Revisa el plan completo antes de ejecutar `apply`.
 
 ## Gobierno de información
 
