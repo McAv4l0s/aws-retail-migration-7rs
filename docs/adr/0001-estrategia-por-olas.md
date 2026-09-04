@@ -1,20 +1,19 @@
-# ADR-0001: Migración por olas y modernización posterior
+# ADR-0001: Wave-Based Migration Followed by Modernization
 
-- Estado: Aceptada
-- Fecha: 2026-08-31
+- Status: Accepted
+- Date: 2026-08-31
 
-## Contexto
+## Context
 
-El portafolio combina urgencia de hardware, dependencias poco observables y componentes que sí diferencian al negocio. Una transformación simultánea elevaría el blast radius y dificultaría atribuir resultados.
+The portfolio combines hardware urgency, poorly observed dependencies, and components that differentiate the business. A simultaneous transformation would increase the blast radius and make outcome attribution difficult.
 
-## Decisión
+## Decision
 
-Preparar primero la plataforma, retirar alcance innecesario, ejecutar rehost/replatform con gates y modernizar checkout después de estabilizar dependencias y operación.
+Prepare the platform first, retire unnecessary scope, execute rehost and replatform movements with gates, and modernize checkout after dependencies and operations stabilize.
 
-## Consecuencias
+## Consequences
 
-- Menor riesgo por ola y rollback más claro.
-- Periodo híbrido y operación temporalmente más compleja.
-- Beneficios de refactor aparecen después de los movimientos de salida.
-- Las decisiones 7 R se revisan con nueva evidencia.
-
+- Lower risk per wave and clearer rollback.
+- A hybrid period with temporarily more complex operations.
+- Refactor benefits appear after the exit movements.
+- 7 Rs decisions are reviewed as new evidence becomes available.
