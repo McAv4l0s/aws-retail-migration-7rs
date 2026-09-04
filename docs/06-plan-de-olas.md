@@ -1,40 +1,40 @@
-# Plan de olas
+# Wave Plan
 
-**Línea base del programa:** mayo de 2026
+**Program baseline:** May 2026
 
-**Ventana planificada:** 4 de mayo–26 de junio de 2026
+**Planned window:** May 4–June 26, 2026
 
-| Ola | Ventana planificada | Alcance | Objetivo | Gate de salida |
+| Wave | Planned window | Scope | Objective | Exit gate |
 |---|---|---|---|---|
-| 0 | 4–8 mayo | Landing zone, red, identidad, logs | Preparar operación segura | Controles y conectividad aprobados |
-| 1 | 11–15 mayo | Retire catálogo + carga piloto | Reducir alcance y validar método | Reconciliación y soporte estabilizado |
-| 2 | 18–22 mayo | Rehost ERP con MGN | Evitar renovación de hardware | UAT, rendimiento y rollback aprobados |
-| 3 | 25–29 mayo | Replatform inventario | Reducir operación de DB | Integridad, RPO y rendimiento aprobados |
-| 4 | 1–12 junio | Repurchase CRM + relocate integraciones | Completar salida gradual | Contratos, datos y operación aprobados |
-| 5 | 15–22 junio | Refactor checkout | Mejorar escala y velocidad | SLO y despliegue progresivo aprobados |
-| Estabilización | 23–26 junio | Hypercare, costos, seguridad y cierre | Confirmar beneficios y operación | KPIs y aceptación ejecutiva |
+| 0 | May 4–8 | Landing zone, network, identity, and logs | Prepare secure operations | Controls and connectivity approved |
+| 1 | May 11–15 | Catalog retirement and pilot workload | Reduce scope and validate the method | Reconciliation complete and support stabilized |
+| 2 | May 18–22 | ERP rehost with MGN | Avoid hardware renewal | UAT, performance, and rollback approved |
+| 3 | May 25–29 | Inventory replatform | Reduce database operations | Integrity, RPO, and performance approved |
+| 4 | June 1–12 | CRM repurchase and integrations relocate | Complete the gradual exit | Contracts, data, and operations approved |
+| 5 | June 15–22 | Checkout refactor | Improve scale and delivery speed | SLO and progressive deployment approved |
+| Stabilization | June 23–26 | Hypercare, cost, security, and closure | Confirm benefits and operations | KPIs and executive acceptance |
 
-## Ventanas de cutover
+## Cutover windows
 
-| ID | Wave | Ventana | Cambio de servicio |
+| ID | Wave | Window | Service change |
 |---|---|---|---|
-| CO-01 | 1 | 15 mayo, 21:00–23:00 | Retiro del catálogo heredado |
-| CO-02 | 2 | 22 mayo, 22:00–23 mayo, 02:00 | Cutover del ERP mediante MGN |
-| CO-03 | 3 | 29 mayo, 22:00–30 mayo, 03:00 | Inventario hacia Amazon RDS |
-| CO-04 | 4 | 12 junio, 21:00–13 junio, 02:00 | CRM SaaS e integraciones trasladadas |
-| CO-05 | 5 | 22 junio, 22:00–23 junio, 01:00 | Tráfico progresivo al nuevo checkout |
+| CO-01 | 1 | May 15, 21:00–23:00 | Legacy catalog retirement |
+| CO-02 | 2 | May 22, 22:00–May 23, 02:00 | ERP cutover through MGN |
+| CO-03 | 3 | May 29, 22:00–May 30, 03:00 | Inventory to Amazon RDS |
+| CO-04 | 4 | June 12, 21:00–June 13, 02:00 | SaaS CRM and relocated integrations |
+| CO-05 | 5 | June 22, 22:00–June 23, 01:00 | Progressive traffic to the new checkout |
 
-La operación detallada, los checkpoints y los umbrales de reversa están en [`10-plan-de-cutover.md`](10-plan-de-cutover.md).
+Detailed operations, checkpoints, and rollback thresholds are in [`10-plan-de-cutover.md`](10-plan-de-cutover.md).
 
-## Gates comunes
+## Common gates
 
-- Go/no-go firmado por negocio, aplicación, infraestructura y seguridad.
-- Cambio congelado y backup verificado.
-- Observabilidad y mesa de control activas.
-- Pruebas críticas completadas.
-- Umbrales de rollback cuantificados.
-- Validación financiera y de licencias.
+- Go/no-go signed by business, application, infrastructure, and security owners.
+- Change freeze active and backup verified.
+- Observability and command bridge active.
+- Critical tests completed.
+- Rollback thresholds quantified.
+- Financial and licensing validation complete.
 
 ## Rollback
 
-Se revierte si hay pérdida o inconsistencia de pedidos, error sostenido sobre el SLO, degradación no mitigable dentro de la ventana o incumplimiento de seguridad. La reversa conserva la fuente hasta la aceptación y evita escrituras concurrentes no reconciliables.
+Rollback is triggered by lost or inconsistent orders, a sustained error rate above the SLO, degradation that cannot be mitigated within the window, or a security breach. The source remains available until acceptance, and concurrent writes that cannot be reconciled are prevented.

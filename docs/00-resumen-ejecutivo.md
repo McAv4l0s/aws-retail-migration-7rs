@@ -1,35 +1,34 @@
-# Resumen ejecutivo
+# Executive Summary
 
-## Decisión solicitada
+## Decision requested
 
-Aprobar un programa por olas para retirar activos sin valor, conservar temporalmente el POS, mover cargas con baja necesidad de cambio y modernizar checkout e inventario. La prioridad es proteger las ventas durante temporadas altas y reducir la dependencia del datacenter sin transformar todo al mismo tiempo.
+Approve a wave-based program to retire assets with no remaining value, temporarily retain the POS platform, move workloads that require little change, and modernize checkout and inventory. The priority is to protect sales during peak seasons and reduce data-center dependency without transforming everything at once.
 
-## Situación de negocio
+## Business situation
 
-La capacidad se dimensiona para el pico anual, aunque gran parte permanece ociosa el resto del año. Los cambios del canal digital dependen de ventanas mensuales y la recuperación requiere coordinación manual entre infraestructura, bases de datos y aplicación. La renovación de hardware crea una fecha límite comercial.
+Capacity is sized for the annual peak even though much of it remains idle during the rest of the year. Digital-channel changes depend on monthly windows, and recovery requires manual coordination across infrastructure, database, and application teams. The hardware renewal creates a commercial deadline.
 
-## Propuesta
+## Proposal
 
-1. Construir la base de gobierno, identidad, red, registro y seguridad.
-2. Validar conectividad y operación con una carga de bajo riesgo.
-3. Rehostear el ERP auxiliar con MGN para acelerar la salida de hardware.
-4. Replatformar inventario en un servicio administrado.
-5. Refactorizar checkout después de estabilizar las dependencias.
-6. Retirar el catálogo batch y mantener POS bajo criterios de salida definidos.
+1. Build the governance, identity, network, logging, and security foundation.
+2. Validate connectivity and operations with a low-risk workload.
+3. Rehost the auxiliary ERP with MGN to accelerate the hardware exit.
+4. Replatform inventory onto a managed service.
+5. Refactor checkout after dependencies have stabilized.
+6. Retire the batch catalog and retain POS under defined exit criteria.
 
-## Valor esperado
+## Expected value
 
-- Menor exposición a fallas físicas y obsolescencia.
-- Capacidad elástica durante campañas comerciales.
-- Recuperación ensayada con RTO y RPO medibles.
-- Costos asignados por producto y ambiente.
-- Cambios más pequeños, frecuentes y reversibles.
+- Lower exposure to physical failure and obsolescence.
+- Elastic capacity during commercial campaigns.
+- Practiced recovery with measurable RTO and RPO.
+- Costs allocated by product and environment.
+- Smaller, more frequent, and reversible changes.
 
-## Condiciones para aprobar
+## Approval conditions
 
-- Business owner y technical owner nombrados por carga.
-- Presupuesto con contingencia y límites de consumo.
-- Pruebas funcionales, de rendimiento, seguridad y recuperación aprobadas.
-- Plan de reversa practicado antes de cada cutover.
-- Prohibición de cambios críticos durante el periodo de mayor venta.
-
+- A business owner and technical owner are named for every workload.
+- The budget includes contingency and consumption limits.
+- Functional, performance, security, and recovery tests are approved.
+- The rollback plan is rehearsed before every cutover.
+- Critical changes are prohibited during the highest-sales period.

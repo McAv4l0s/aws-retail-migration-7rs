@@ -1,117 +1,129 @@
-# Migración y modernización AWS para retail omnicanal
+# AWS Migration and Modernization for Omnichannel Retail
 
-Proyecto de trabajo que documenta la evaluación, movilización y migración de un portafolio retail hacia AWS. La organización se identifica como **Cliente Confidencial** y los datos del caso se presentan de forma agregada o anonimizada.
+Professional project documenting the assessment, mobilization, and migration of a retail application portfolio to AWS. The organization is identified as **Confidential Client**, and all case data is aggregated or anonymized.
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| Línea base del programa | Mayo de 2026 |
-| Inicio planificado | 4 de mayo de 2026 |
-| Fin de estabilización | 26 de junio de 2026 |
-| Método | 7 R, AWS Well-Architected y migración por olas |
+| Program baseline | May 2026 |
+| Planned start | May 4, 2026 |
+| Stabilization completion | June 26, 2026 |
+| Method | 7 Rs, AWS Well-Architected, and wave-based migration |
 
-## Resumen ejecutivo
+## Executive summary
 
-La organización opera comercio electrónico, tiendas físicas y procesos de back office sobre una combinación de VMware, servidores físicos y software comercial. El crecimiento estacional expone limitaciones de capacidad, recuperaciones manuales, despliegues lentos y costos difíciles de atribuir.
+The organization operates e-commerce, physical stores, and back-office processes across VMware, physical servers, and commercial software. Seasonal growth exposes capacity constraints, manual recovery procedures, slow deployments, and costs that are difficult to allocate.
 
-El programa clasifica siete cargas mediante las **7 R de migración**, establece una landing zone, ejecuta un rehost controlado con AWS Transform MGN y moderniza los componentes que aportan una ventaja competitiva. La arquitectura objetivo se evalúa con los seis pilares del AWS Well-Architected Framework.
+The program classifies seven workloads using the **7 Rs of migration**, establishes a landing zone, performs a controlled rehost with AWS Transform MGN, and modernizes the components that provide competitive advantage. The target architecture is assessed against the six pillars of the AWS Well-Architected Framework.
 
-### Resultados objetivo del business case
+### Business case targets
 
-| Indicador | Línea base | Objetivo | Método de validación |
+| Indicator | Baseline | Target | Validation method |
 |---|---:|---:|---|
-| Disponibilidad del canal digital | 99.50% | 99.95% | SLI mensual de solicitudes exitosas |
-| Tiempo de recuperación (RTO) | 8 h | 60 min | Ejercicio de recuperación |
-| Punto de recuperación (RPO) | 24 h | 15 min | Prueba de restauración y reconciliación |
-| Tiempo de aprovisionamiento | 10 días | < 2 h | Pipeline de infraestructura |
-| Frecuencia de despliegue | Mensual | Semanal | Historial de CI/CD |
-| Costo unitario por pedido | Índice 100 | ≤ 82 | Cost allocation / pedidos completados |
+| Digital channel availability | 99.50% | 99.95% | Monthly successful-request SLI |
+| Recovery time objective (RTO) | 8 h | 60 min | Recovery exercise |
+| Recovery point objective (RPO) | 24 h | 15 min | Restore and reconciliation test |
+| Provisioning time | 10 days | < 2 h | Infrastructure pipeline |
+| Deployment frequency | Monthly | Weekly | CI/CD history |
+| Unit cost per order | Index 100 | ≤ 82 | Cost allocation / completed orders |
 
-Los valores son objetivos del caso de negocio; no se presentan como resultados de producción. Las mediciones reproducibles del laboratorio se registran en [`docs/09-kpis-y-evidencia.md`](docs/09-kpis-y-evidencia.md).
+These values are business case targets, not claimed production results. Reproducible laboratory measurements are documented in [`docs/09-kpis-y-evidencia.md`](docs/09-kpis-y-evidencia.md).
 
-## Alcance de las 7 R
+## 7 Rs scope
 
-| R | Carga | Decisión | Resultado esperado |
+| R | Workload | Decision | Expected outcome |
 |---|---|---|---|
-| Retire | Catálogo batch heredado | Desactivar tras reconciliar datos | Eliminar soporte y riesgo obsoleto |
-| Retain | POS de tiendas | Mantener durante la primera fase | Evitar interrupción en sucursales |
-| Rehost | ERP auxiliar en VMware | Migrar a EC2 con MGN | Salir del hardware próximo a renovación |
-| Relocate | Clúster VMware de integraciones | Trasladar sin rediseño inicial | Reducir plazo de salida del datacenter |
-| Repurchase | CRM instalado localmente | Sustituir por SaaS | Estandarizar ventas y soporte |
-| Replatform | Base de datos de inventario | Migrar a Amazon RDS | Reducir operación y mejorar recuperación |
-| Refactor | Checkout monolítico | Servicios desacoplados y eventos | Escalar pedidos y acelerar cambios |
+| Retire | Legacy batch catalog | Decommission after data reconciliation | Eliminate obsolete support and risk |
+| Retain | Store POS | Keep during the first phase | Avoid store disruption |
+| Rehost | Auxiliary ERP on VMware | Migrate to EC2 with MGN | Exit hardware approaching renewal |
+| Relocate | VMware integration cluster | Move without initial redesign | Accelerate data-center exit |
+| Repurchase | On-premises CRM | Replace with SaaS | Standardize sales and support |
+| Replatform | Inventory database | Migrate to Amazon RDS | Reduce operations and improve recovery |
+| Refactor | Checkout monolith | Decoupled services and events | Scale orders and accelerate change |
 
-La matriz completa y los criterios de decisión están en [`docs/03-evaluacion-7r.md`](docs/03-evaluacion-7r.md).
+The complete matrix and decision criteria are in [`docs/03-evaluacion-7r.md`](docs/03-evaluacion-7r.md).
 
-## Arquitectura y método
+## Architecture and method
 
 ```mermaid
 flowchart LR
-    U[Clientes y tiendas] --> E[CloudFront + WAF]
+    U[Customers and stores] --> E[CloudFront + WAF]
     E --> A[ALB / API]
-    A --> C[Checkout y catálogo]
+    A --> C[Checkout and catalog]
     C --> DB[(RDS Multi-AZ)]
-    C --> Q[Colas y eventos]
-    Q --> F[Procesamiento de pedidos]
-    F --> ERP[ERP en EC2 migrado con MGN]
-    POS[POS retenido] --> DX[Conectividad híbrida]
+    C --> Q[Queues and events]
+    Q --> F[Order processing]
+    F --> ERP[ERP on EC2 migrated with MGN]
+    POS[Retained POS] --> DX[Hybrid connectivity]
     DX --> F
-    O[Observabilidad y seguridad] -.-> A
+    O[Observability and security] -.-> A
     O -.-> C
     O -.-> DB
     O -.-> ERP
 ```
 
-El programa sigue cuatro movimientos: descubrir y evaluar, preparar la plataforma, migrar por olas y optimizar. MGN se utiliza exclusivamente donde la decisión es rehost; no se atribuye a las demás estrategias.
+The program follows four movements: discover and assess, prepare the platform, migrate in waves, and optimize. MGN is used only where the decision is rehost; it is not attributed to the other strategies.
 
-## Waves de migración
+## Migration waves
 
-La línea base del plan fue establecida en **mayo de 2026**. Las olas separan la preparación, los movimientos de salida y la modernización para mantener criterios claros de go/no-go y reversa.
+The plan baseline was established in **May 2026**. Waves separate platform preparation, exit movements, and modernization to maintain explicit go/no-go and rollback criteria.
 
-| Wave | Ventana planificada | Alcance | Estrategia principal | Gate de salida |
+| Wave | Planned window | Scope | Primary strategy | Exit gate |
 |---|---|---|---|---|
-| 0 | 4–8 mayo 2026 | Landing zone, red, identidad y logs | Foundation | Controles y conectividad aprobados |
-| 1 | 11–15 mayo 2026 | Retiro del catálogo y carga piloto | Retire | Reconciliación y soporte estabilizado |
-| 2 | 18–22 mayo 2026 | ERP auxiliar hacia EC2 mediante MGN | Rehost | UAT, rendimiento y rollback aprobados |
-| 3 | 25–29 mayo 2026 | Base de inventario hacia Amazon RDS | Replatform | Integridad, RPO y rendimiento aprobados |
-| 4 | 1–12 junio 2026 | CRM SaaS e integraciones VMware | Repurchase / Relocate | Contratos, datos y operación aprobados |
-| 5 | 15–22 junio 2026 | Modernización progresiva de checkout | Refactor | SLO y despliegue progresivo aprobados |
-| Estabilización | 23–26 junio 2026 | Hypercare, costos, seguridad y cierre | Optimize | KPIs y aceptación ejecutiva |
+| 0 | May 4–8, 2026 | Landing zone, network, identity, and logs | Foundation | Controls and connectivity approved |
+| 1 | May 11–15, 2026 | Catalog retirement and pilot workload | Retire | Reconciliation complete and support stabilized |
+| 2 | May 18–22, 2026 | Auxiliary ERP to EC2 through MGN | Rehost | UAT, performance, and rollback approved |
+| 3 | May 25–29, 2026 | Inventory database to Amazon RDS | Replatform | Integrity, RPO, and performance approved |
+| 4 | June 1–12, 2026 | SaaS CRM and VMware integrations | Repurchase / Relocate | Contracts, data, and operations approved |
+| 5 | June 15–22, 2026 | Progressive checkout modernization | Refactor | SLO and progressive deployment approved |
+| Stabilization | June 23–26, 2026 | Hypercare, cost, security, and closure | Optimize | KPIs and executive acceptance |
 
-El calendario detallado, los gates comunes y el criterio de rollback están en [`docs/06-plan-de-olas.md`](docs/06-plan-de-olas.md).
+The detailed schedule, common gates, and rollback criteria are in [`docs/06-plan-de-olas.md`](docs/06-plan-de-olas.md).
 
-## Calendario de cutovers
+## Cutover calendar
 
-Las waves indican periodos de trabajo; los cutovers son las ventanas específicas en las que cambia el servicio, los datos o el tráfico.
+Waves define working periods; cutovers are the specific windows in which service, data, or traffic changes.
 
-| Cutover | Wave | Fecha y ventana | Carga | Movimiento |
+| Cutover | Wave | Date and window | Workload | Movement |
 |---|---|---|---|---|
-| CO-01 | 1 | 15 mayo, 21:00–23:00 | Catálogo heredado | Retire |
-| CO-02 | 2 | 22 mayo, 22:00–23 mayo, 02:00 | ERP auxiliar | Rehost con MGN |
-| CO-03 | 3 | 29 mayo, 22:00–30 mayo, 03:00 | Inventario | Replatform a RDS |
-| CO-04 | 4 | 12 junio, 21:00–13 junio, 02:00 | CRM e integraciones | Repurchase / Relocate |
-| CO-05 | 5 | 22 junio, 22:00–23 junio, 01:00 | Checkout | Refactor progresivo |
+| CO-01 | 1 | May 15, 21:00–23:00 | Legacy catalog | Retire |
+| CO-02 | 2 | May 22, 22:00–May 23, 02:00 | Auxiliary ERP | Rehost with MGN |
+| CO-03 | 3 | May 29, 22:00–May 30, 03:00 | Inventory | Replatform to RDS |
+| CO-04 | 4 | June 12, 21:00–June 13, 02:00 | CRM and integrations | Repurchase / Relocate |
+| CO-05 | 5 | June 22, 22:00–June 23, 01:00 | Checkout | Progressive refactor |
 
-Todas las ventanas utilizan la zona horaria `America/Mexico_City`. Los criterios go/no-go, umbrales de rollback, roles y checkpoints se encuentran en [`docs/10-plan-de-cutover.md`](docs/10-plan-de-cutover.md).
+All windows use the `America/Mexico_City` time zone. Go/no-go criteria, rollback thresholds, roles, and checkpoints are defined in [`docs/10-plan-de-cutover.md`](docs/10-plan-de-cutover.md).
 
-## Contenido del repositorio
+## Repository contents
 
-- [`docs/00-resumen-ejecutivo.md`](docs/00-resumen-ejecutivo.md): narrativa para dirección.
-- [`docs/01-caso-de-negocio.md`](docs/01-caso-de-negocio.md): valor, costos, beneficios y gobierno.
-- [`docs/02-estado-actual.md`](docs/02-estado-actual.md): alcance, dependencias y restricciones.
-- [`docs/03-evaluacion-7r.md`](docs/03-evaluacion-7r.md): racionalización del portafolio.
-- [`docs/04-arquitectura-objetivo.md`](docs/04-arquitectura-objetivo.md): diseño de la solución.
-- [`docs/05-well-architected.md`](docs/05-well-architected.md): revisión de los seis pilares.
-- [`docs/06-plan-de-olas.md`](docs/06-plan-de-olas.md): calendario, gates y rollback.
-- [`docs/07-runbook-mgn.md`](docs/07-runbook-mgn.md): prueba y cutover del rehost.
-- [`docs/08-riesgos-y-raci.md`](docs/08-riesgos-y-raci.md): riesgos, responsables y controles.
-- [`docs/09-kpis-y-evidencia.md`](docs/09-kpis-y-evidencia.md): trazabilidad de resultados.
-- [`docs/10-plan-de-cutover.md`](docs/10-plan-de-cutover.md): ventanas, responsables y reversa.
-- [`docs/11-operacion-aws-transform-mgn.md`](docs/11-operacion-aws-transform-mgn.md): source servers, applications, waves, global view, history, connectors e import/export.
-- [`data/application-portfolio.csv`](data/application-portfolio.csv): inventario de decisiones.
-- [`data/mgn-import-wave-02.csv`](data/mgn-import-wave-02.csv): ejemplo de inventario CSV para MGN.
-- [`infra/terraform`](infra/terraform): landing zone desplegable como código.
+- [`docs/00-resumen-ejecutivo.md`](docs/00-resumen-ejecutivo.md): executive narrative.
+- [`docs/01-caso-de-negocio.md`](docs/01-caso-de-negocio.md): value, cost, benefits, and governance.
+- [`docs/02-estado-actual.md`](docs/02-estado-actual.md): scope, dependencies, and constraints.
+- [`docs/03-evaluacion-7r.md`](docs/03-evaluacion-7r.md): portfolio rationalization.
+- [`docs/04-arquitectura-objetivo.md`](docs/04-arquitectura-objetivo.md): solution design.
+- [`docs/05-well-architected.md`](docs/05-well-architected.md): six-pillar review.
+- [`docs/06-plan-de-olas.md`](docs/06-plan-de-olas.md): schedule, gates, and rollback.
+- [`docs/07-runbook-mgn.md`](docs/07-runbook-mgn.md): rehost testing and cutover.
+- [`docs/08-riesgos-y-raci.md`](docs/08-riesgos-y-raci.md): risks, owners, and controls.
+- [`docs/09-kpis-y-evidencia.md`](docs/09-kpis-y-evidencia.md): outcome traceability.
+- [`docs/10-plan-de-cutover.md`](docs/10-plan-de-cutover.md): windows, responsibilities, and rollback.
+- [`docs/11-operacion-aws-transform-mgn.md`](docs/11-operacion-aws-transform-mgn.md): source servers, applications, waves, global view, history, connectors, and import/export.
+- [`data/application-portfolio.csv`](data/application-portfolio.csv): decision inventory.
+- [`data/mgn-import-wave-02.csv`](data/mgn-import-wave-02.csv): MGN CSV import example.
+- [`infra/terraform`](infra/terraform): deployable private landing zone with TGW routing, network controls, Flow Logs, alarms, and dashboard.
 
-## Cómo validar la infraestructura
+## Terraform network foundation
+
+| Layer | CIDR / component | Purpose |
+|---|---|---|
+| VPC | `10.40.0.0/16` | Existing migration address space retained |
+| Receptor subnet | `10.40.0.0/24` | Static migration receptor layer |
+| Transit subnet | `10.40.1.0/24` | Transit Gateway VPC attachment |
+| Private subnet A | `10.40.10.0/24` | Migrated workloads in the first AZ |
+| Private subnet B | `10.40.20.0/24` | Migrated workloads in the second AZ |
+
+The foundation deliberately creates **no NAT Gateway and no Internet Gateway**. Workload egress follows `private subnet → TGW → VPN/Direct Connect attachment → on-premises proxy or firewall`. The TGW default route is created only when `on_premises_tgw_attachment_id` references a real external attachment. See [`infra/terraform/README.md`](infra/terraform/README.md) for the resource map, safeguards, and deployment sequence.
+
+## Infrastructure validation
 
 ```bash
 cd infra/terraform
@@ -120,9 +132,9 @@ terraform init -backend=false
 terraform validate
 ```
 
-El código está diseñado para revisión y laboratorio. Antes de aplicar recursos debe configurarse una cuenta sandbox, límites de presupuesto, región permitida y controles de seguridad.
+The code is intended for review and laboratory use. Before creating resources, configure a sandbox account, budget limits, an approved region, and security controls.
 
-### Despliegue con Terraform
+### Terraform deployment
 
 ```bash
 cd infra/terraform
@@ -131,8 +143,8 @@ terraform plan -out=c2kmig.tfplan
 terraform apply c2kmig.tfplan
 ```
 
-La configuración evita NAT Gateway y recursos de cómputo para controlar el costo inicial. Revisa el plan completo antes de ejecutar `apply`.
+The configuration avoids NAT Gateway and compute resources to control initial cost. Review the complete plan before running `apply`.
 
-## Gobierno de información
+## Information governance
 
-Este repositorio no contiene nombres de compañías, credenciales, datos personales, configuraciones exportadas ni identificadores de infraestructura de terceros. Las decisiones se documentan como un proyecto de trabajo de portafolio y deben evaluarse contra el contexto real antes de reutilizarse.
+This repository contains no company names, credentials, personal data, exported configurations, or third-party infrastructure identifiers. Decisions are documented as a professional portfolio project and must be evaluated against the real context before reuse.

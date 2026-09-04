@@ -1,4 +1,4 @@
 mgn:region,mgn:server:user-provided-id,mgn:server:fqdn-for-action-framework,mgn:server:platform,mgn:server:tag:Portfolio,mgn:server:tag:CutoverId,mgn:app:name,mgn:app:description,mgn:wave:name,mgn:wave:description,mgn:launch:instance-type,mgn:launch:transfer-server-tags
-us-east-1,ERP-WEB-01,erp-web-01.example.internal,Linux,c2kmig,CO-02,ERP-Auxiliar,ERP finance and fulfillment auxiliary services,wave-02-erp-rehost,Wave 2 rehost with cutover CO-02,m6i.large,true
-us-east-1,ERP-APP-01,erp-app-01.example.internal,Windows,c2kmig,CO-02,ERP-Auxiliar,ERP finance and fulfillment auxiliary services,wave-02-erp-rehost,Wave 2 rehost with cutover CO-02,m6i.xlarge,true
-us-east-1,ERP-BATCH-01,erp-batch-01.example.internal,Linux,c2kmig,CO-02,ERP-Auxiliar,ERP finance and fulfillment auxiliary services,wave-02-erp-rehost,Wave 2 rehost with cutover CO-02,m6i.large,true
+us-east-1,ERP-WEB-01,erp-web-01.example.internal,Linux,c2kmig,CO-02,ERP-Auxiliary,ERP finance and fulfillment auxiliary services,wave-02-erp-rehost,Wave 2 rehost with cutover CO-02,m6i.large,true
+us-east-1,ERP-APP-01,erp-app-01.example.internal,Windows,c2kmig,CO-02,ERP-Auxiliary,ERP finance and fulfillment auxiliary services,wave-02-erp-rehost,Wave 2 rehost with cutover CO-02,m6i.xlarge,true
+us-east-1,ERP-BATCH-01,erp-batch-01.example.internal,Linux,c2kmig,CO-02,ERP-Auxiliary,ERP finance and fulfillment auxiliary services,wave-02-erp-rehost,Wave 2 rehost with cutover CO-02,m6i.large,true

@@ -1,15 +1,15 @@
-# Arquitectura objetivo
+# Target Architecture
 
-## Principios
+## Principles
 
-- Separación de cuentas por ambiente y función.
-- Acceso humano federado; sin usuarios permanentes para operación diaria.
-- Cifrado, registros y etiquetado habilitados desde la plataforma.
-- Alta disponibilidad proporcional a la criticidad.
-- Preferencia por servicios administrados cuando reduce carga operativa.
-- Interfaces asíncronas para absorber picos y fallas transitorias.
+- Separate accounts by environment and function.
+- Federated human access with no permanent users for daily operations.
+- Encryption, logging, and tagging enabled at the platform level.
+- High availability proportional to criticality.
+- Prefer managed services when they reduce operational burden.
+- Use asynchronous interfaces to absorb peaks and transient failures.
 
-## Flujo objetivo
+## Target flow
 
 ```mermaid
 flowchart TB
@@ -38,7 +38,6 @@ flowchart TB
     MGN -. replication/cutover .-> EC2
 ```
 
-## Controles transversales
+## Cross-cutting controls
 
-CloudTrail y logs centralizados, métricas y alarmas, detección de configuración, gestión de secretos, backups con pruebas de restauración, etiquetado obligatorio y presupuestos por cuenta. Los servicios exactos se confirman mediante requisitos, región y costo; el diagrama no reemplaza el diseño detallado.
-
+CloudTrail and centralized logs, metrics and alarms, configuration detection, secrets management, backups with restore testing, mandatory tagging, and account-level budgets. Exact services are confirmed from requirements, region, and cost; the diagram does not replace detailed design.

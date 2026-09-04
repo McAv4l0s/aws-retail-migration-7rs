@@ -1,25 +1,24 @@
-# KPIs y evidencia
+# KPIs and Evidence
 
-## Regla de trazabilidad
+## Traceability rule
 
-Cada cifra se etiqueta como línea base, objetivo, medición de laboratorio o resultado operativo. No se convierte un objetivo en resultado sin evidencia.
+Every figure is labeled as a baseline, target, laboratory measurement, or operational result. A target is never presented as a result without evidence.
 
-| KPI | Fórmula | Fuente | Cadencia | Evidencia en repo |
+| KPI | Formula | Source | Cadence | Repository evidence |
 |---|---|---|---|---|
-| Disponibilidad | solicitudes exitosas / solicitudes totales | Métricas de aplicación | Mensual | Export anonimizado |
-| RTO | restauración - inicio del incidente | Ejercicio DR | Trimestral | Reporte de game day |
-| RPO | último dato recuperado vs interrupción | DB/reconciliación | Trimestral | Reporte de restore |
-| Lead time | producción - commit aprobado | CI/CD | Por release | Historial de workflow |
-| Costo por pedido | costo atribuible / pedidos completados | Billing + negocio | Mensual | Modelo FinOps |
-| Change failure rate | despliegues con incidente / despliegues | ITSM + CI/CD | Mensual | Registro de releases |
+| Availability | successful requests / total requests | Application metrics | Monthly | Anonymized export |
+| RTO | restoration - incident start | DR exercise | Quarterly | Game-day report |
+| RPO | last recovered data vs. interruption | Database/reconciliation | Quarterly | Restore report |
+| Lead time | production - approved commit | CI/CD | Per release | Workflow history |
+| Cost per order | attributable cost / completed orders | Billing + business | Monthly | FinOps model |
+| Change failure rate | deployments with incidents / deployments | ITSM + CI/CD | Monthly | Release record |
 
-## Evidencia inicial del proyecto
+## Initial project evidence
 
-- Validación automática de formato y sintaxis de Terraform.
-- Inventario versionado de decisiones 7 R.
-- Diagramas as-is y to-be revisables.
-- Runbook de MGN con prueba, cutover y reversa.
-- Registro de riesgos y owners.
+- Automated Terraform format and syntax validation.
+- Version-controlled inventory of 7 Rs decisions.
+- Reviewable as-is and to-be diagrams.
+- MGN runbook covering testing, cutover, and rollback.
+- Risk register with named owners.
 
-Los load tests, restore tests y capturas de ejecución se añadirán cuando exista un entorno sandbox desplegable.
-
+Load tests, restore tests, and execution screenshots will be added when a deployable sandbox environment is available.

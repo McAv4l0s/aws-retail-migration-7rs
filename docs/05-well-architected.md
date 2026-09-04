@@ -1,20 +1,19 @@
-# Revisión AWS Well-Architected
+# AWS Well-Architected Review
 
-| Pilar | Riesgo inicial | Decisión | Evidencia esperada |
+| Pillar | Initial risk | Decision | Expected evidence |
 |---|---|---|---|
-| Excelencia operativa | Runbooks manuales y ownership incompleto | IaC, CI/CD, owners y game days | Pipeline, ADR, runbooks y postmortems |
-| Seguridad | Accesos persistentes y logs fragmentados | Federación, mínimo privilegio, cifrado y logs centrales | Policy checks, trails y findings |
-| Confiabilidad | Recuperación no ensayada | Multi-AZ según criticidad, backups y pruebas | Restore report y métricas RTO/RPO |
-| Rendimiento | Capacidad fija para picos | Pruebas, escalamiento y colas | Load test y utilización |
-| Costos | Sin costo por producto | Etiquetas, budgets, rightsizing y unit economics | Reporte costo/pedido |
-| Sostenibilidad | Ambientes ociosos | Apagado programado y servicios administrados | Horas evitadas y utilización |
+| Operational Excellence | Manual runbooks and incomplete ownership | IaC, CI/CD, owners, and game days | Pipeline, ADRs, runbooks, and postmortems |
+| Security | Persistent access and fragmented logs | Federation, least privilege, encryption, and centralized logs | Policy checks, trails, and findings |
+| Reliability | Recovery not rehearsed | Multi-AZ by criticality, backups, and testing | Restore report and RTO/RPO metrics |
+| Performance Efficiency | Fixed capacity for peaks | Testing, scaling, and queues | Load test and utilization |
+| Cost Optimization | No product-level cost | Tags, budgets, rightsizing, and unit economics | Cost-per-order report |
+| Sustainability | Idle environments | Scheduled shutdown and managed services | Avoided hours and utilization |
 
-## Riesgos altos pendientes
+## Open high risks
 
-1. Dependencias del ERP no observadas durante un ciclo comercial completo.
-2. RPO de inventario no validado mediante reconciliación de pedidos.
-3. Modelo de identidad de operadores y proveedores por aprobar.
-4. Costo del pico sin prueba de carga representativa.
+1. ERP dependencies have not been observed through a complete commercial cycle.
+2. Inventory RPO has not been validated through order reconciliation.
+3. The operator and vendor identity model still requires approval.
+4. Peak cost lacks a representative load test.
 
-La revisión se repite antes de producción y 30 días después de cada ola. Cada riesgo debe tener propietario, fecha y criterio de cierre.
-
+The review is repeated before production and 30 days after every wave. Every risk must have an owner, date, and closure criterion.

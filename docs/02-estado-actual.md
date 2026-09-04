@@ -1,31 +1,30 @@
-# Estado actual y descubrimiento
+# Current State and Discovery
 
-## Vista lógica
+## Logical view
 
 ```mermaid
 flowchart LR
-    WEB[Web monolítica] --> INV[(Inventario SQL)]
-    WEB --> ERP[ERP auxiliar]
-    POS[POS en tiendas] --> ERP
-    BATCH[Catálogo batch] --> WEB
-    CRM[CRM local] --> ERP
-    INT[Integraciones VMware] --> ERP
+    WEB[Web monolith] --> INV[(SQL inventory)]
+    WEB --> ERP[Auxiliary ERP]
+    POS[Store POS] --> ERP
+    BATCH[Batch catalog] --> WEB
+    CRM[On-premises CRM] --> ERP
+    INT[VMware integrations] --> ERP
 ```
 
-## Hallazgos
+## Findings
 
-- Dependencias se conocen por entrevistas, no por telemetría centralizada.
-- Web e inventario comparten ventanas de mantenimiento.
-- ERP tiene integración por archivos y tareas programadas.
-- POS depende de conectividad de sucursales y debe operar ante interrupciones.
-- Las cuentas de servicio y certificados no tienen inventario único.
-- Los reportes de capacidad no separan demanda normal de campañas.
+- Dependencies are known through interviews rather than centralized telemetry.
+- Web and inventory share maintenance windows.
+- ERP integrates through files and scheduled jobs.
+- POS depends on store connectivity and must operate through interruptions.
+- Service accounts and certificates have no single inventory.
+- Capacity reports do not separate normal demand from campaigns.
 
-## Datos mínimos de descubrimiento
+## Minimum discovery data
 
-Para cada carga se recopilan propietario, criticidad, ambiente, sistema operativo, base de datos, CPU/memoria, almacenamiento, crecimiento, puertos, dependencias, SLA, RTO, RPO, licencias, ventanas, clasificación de datos y calendario comercial.
+For every workload, collect owner, criticality, environment, operating system, database, CPU/memory, storage, growth, ports, dependencies, SLA, RTO, RPO, licenses, windows, data classification, and commercial calendar.
 
-## Criterios de readiness
+## Readiness criteria
 
-Una carga no entra a una ola si carece de propietario, mapa de dependencias, criterio de aceptación, backup verificado, ventana aprobada o reversa practicable.
-
+A workload does not enter a wave if it lacks an owner, dependency map, acceptance criteria, verified backup, approved window, or practical rollback.
