@@ -1,20 +1,19 @@
-# Evaluación de las 7 R
+# 7 Rs Assessment
 
-## Método de decisión
+## Decision method
 
-Cada carga recibe una puntuación de 1 a 5 en valor de negocio, urgencia, riesgo técnico, complejidad de dependencias, preparación operativa y potencial de modernización. La R elegida no es permanente: se revisa al completar descubrimiento y pruebas.
+Each workload receives a score from 1 to 5 for business value, urgency, technical risk, dependency complexity, operational readiness, and modernization potential. The selected R is not permanent: it is reviewed when discovery and testing produce new evidence.
 
-| Carga | R | Motivo de negocio | Motivo técnico | Gate principal |
+| Workload | R | Business rationale | Technical rationale | Primary gate |
 |---|---|---|---|---|
-| Catálogo batch | Retire | Función duplicada | Componentes sin soporte | Reconciliación y archivo aprobados |
-| POS | Retain | Alto riesgo en tiendas | Dependencia de periféricos y red | Estrategia edge definida |
-| ERP auxiliar | Rehost | Fecha límite de hardware | Compatible con réplica a EC2 | Prueba MGN y licencias aprobadas |
-| Integraciones VMware | Relocate | Salida rápida del sitio | Cambio mínimo de hipervisor | Compatibilidad y conectividad |
-| CRM | Repurchase | No diferencia al negocio | SaaS cubre capacidades | Migración de datos y contratos |
-| Inventario | Replatform | Menor operación | Motor compatible con RDS | Rendimiento y reconciliación |
-| Checkout | Refactor | Diferenciador de ingresos | Monolito limita escalamiento | SLO, pruebas y strangler pattern |
+| Batch catalog | Retire | Duplicate function | Unsupported components | Reconciliation and archive approved |
+| POS | Retain | High store risk | Peripheral and network dependencies | Edge strategy defined |
+| Auxiliary ERP | Rehost | Hardware deadline | Compatible with replication to EC2 | MGN test and licensing approved |
+| VMware integrations | Relocate | Rapid site exit | Minimal hypervisor change | Compatibility and connectivity |
+| CRM | Repurchase | Not a business differentiator | SaaS meets requirements | Data migration and contracts |
+| Inventory | Replatform | Lower operational burden | Engine compatible with RDS | Performance and reconciliation |
+| Checkout | Refactor | Revenue differentiator | Monolith limits scaling | SLO, tests, and strangler pattern |
 
-## Secuencia
+## Sequence
 
-La clasificación no significa ejecutar siete movimientos simultáneos. Retire y repurchase reducen alcance; retain controla riesgo; rehost/relocate aceleran la salida; replatform/refactor se programan cuando la plataforma y el equipo están preparados.
-
+The classification does not mean executing seven movements simultaneously. Retire and repurchase reduce scope; retain controls risk; rehost and relocate accelerate exit; replatform and refactor are scheduled when the platform and team are ready.

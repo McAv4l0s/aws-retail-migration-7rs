@@ -1,41 +1,40 @@
-# Caso de negocio
+# Business Case
 
-## Impulsores
+## Drivers
 
-| Impulsor | Consecuencia actual | Capacidad habilitada |
+| Driver | Current consequence | Enabled capability |
 |---|---|---|
-| Crecimiento estacional | Saturación y sobreaprovisionamiento | Escalamiento por demanda |
-| Renovación de hardware | Inversión sin diferenciación | Consumo flexible y salida gradual |
-| Recuperación manual | Pérdida potencial de ventas | Recuperación automatizada y ensayada |
-| Entregas mensuales | Respuesta lenta al mercado | CI/CD y cambios desacoplados |
-| Costos compartidos | Baja visibilidad por producto | Etiquetado, presupuestos y costo unitario |
+| Seasonal growth | Saturation and overprovisioning | Demand-based scaling |
+| Hardware renewal | Non-differentiating investment | Flexible consumption and gradual exit |
+| Manual recovery | Potential lost sales | Automated and practiced recovery |
+| Monthly releases | Slow market response | CI/CD and decoupled changes |
+| Shared costs | Low product-level visibility | Tagging, budgets, and unit cost |
 
-## Modelo financiero
+## Financial model
 
-El análisis compara un horizonte de 36 meses:
+The analysis compares a 36-month horizon:
 
-`TCO = migración + nube + licencias + soporte + conectividad + operación + contingencia`
+`TCO = migration + cloud + licenses + support + connectivity + operations + contingency`
 
-`Beneficio neto = costos evitados + productividad + reducción de incidentes - TCO incremental`
+`Net benefit = avoided costs + productivity + incident reduction - incremental TCO`
 
-`ROI = beneficio neto / inversión del programa`
+`ROI = net benefit / program investment`
 
-No se publican importes de una organización. El workbook futuro utilizará supuestos editables, mostrará sensibilidad de demanda ±20% y separará CAPEX evitado de ahorro operativo.
+No organization-specific amounts are published. A future workbook will use editable assumptions, show demand sensitivity of ±20%, and separate avoided CAPEX from operating savings.
 
-## Beneficios y propietarios
+## Benefits and owners
 
-| Beneficio | Indicador | Propietario | Frecuencia |
+| Benefit | Indicator | Owner | Frequency |
 |---|---|---|---|
-| Continuidad de venta | Disponibilidad y pedidos fallidos | Head of Digital | Semanal/mensual |
-| Recuperación | RTO/RPO probado | Service Owner | Trimestral |
-| Velocidad | Lead time y frecuencia de despliegue | Engineering Manager | Por release |
-| Eficiencia | Costo por pedido | FinOps + Product Owner | Mensual |
-| Riesgo | Hallazgos críticos abiertos | Security Owner | Semanal |
+| Sales continuity | Availability and failed orders | Head of Digital | Weekly/monthly |
+| Recovery | Tested RTO/RPO | Service Owner | Quarterly |
+| Speed | Lead time and deployment frequency | Engineering Manager | Per release |
+| Efficiency | Cost per order | FinOps + Product Owner | Monthly |
+| Risk | Open critical findings | Security Owner | Weekly |
 
-## Exclusiones
+## Exclusions
 
-- Sustitución inmediata del POS.
-- Migración de datos personales reales al laboratorio.
-- Cambio simultáneo de ERP y procesos financieros.
-- Compromisos de ahorro sin baseline y volumen transaccional.
-
+- Immediate POS replacement.
+- Migration of real personal data into the laboratory.
+- Simultaneous ERP and financial-process change.
+- Savings commitments without a baseline and transaction volume.

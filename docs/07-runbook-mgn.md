@@ -1,43 +1,43 @@
-# Runbook de rehost con AWS Transform MGN
+# AWS Transform MGN Rehost Runbook
 
-## Alcance
+## Scope
 
-Este runbook aplica al ERP auxiliar clasificado como **Rehost**. MGN replica servidores; la migración de base de datos, modernización y relocate requieren patrones distintos.
+This runbook applies to the auxiliary ERP classified as **Rehost**. MGN replicates servers; database migration, modernization, and relocation require different patterns.
 
-## Preparación
+## Preparation
 
-- Confirmar sistema operativo, discos, espacio, red y compatibilidad.
-- Aprobar puertos, endpoints, permisos y cifrado del staging area.
-- Definir plantillas de replicación, lanzamiento y post-launch.
-- Registrar owner, ola, tags, instancia objetivo y licensing.
-- Tomar backup independiente y verificar restauración.
+- Confirm operating system, disks, space, network, and compatibility.
+- Approve staging-area ports, endpoints, permissions, and encryption.
+- Define replication, launch, and post-launch templates.
+- Record owner, wave, tags, target instance, and licensing.
+- Take an independent backup and verify restoration.
 
-## Prueba
+## Test
 
-1. Instalar el agente autorizado en la fuente.
-2. Esperar sincronización inicial y confirmar lag/backlog aceptables.
-3. Lanzar instancia en modo test en red aislada.
-4. Aplicar acciones post-launch y hardening.
-5. Ejecutar smoke, integración, rendimiento, seguridad y UAT.
-6. Corregir hallazgos y repetir hasta obtener aprobación.
+1. Install the authorized agent on the source.
+2. Wait for initial synchronization and confirm acceptable lag and backlog.
+3. Launch a test instance in an isolated network.
+4. Apply post-launch actions and hardening.
+5. Run smoke, integration, performance, security, and UAT tests.
+6. Remediate findings and repeat until approved.
 
 ## Cutover
 
-**Ventana CO-02:** 22 de mayo de 2026, 22:00–23 de mayo, 02:00, zona `America/Mexico_City`.
+**CO-02 window:** May 22, 2026, 22:00–May 23, 02:00, `America/Mexico_City` time zone.
 
-1. Iniciar freeze y mesa de control.
-2. Confirmar backup, replicación saludable y ausencia de lag.
-3. Detener servicios que generan escrituras.
-4. Lanzar la instancia de cutover.
-5. Validar sistema, integraciones, monitoreo y reconciliación.
-6. Cambiar tráfico/DNS conforme al TTL aprobado.
-7. Observar durante la ventana de estabilización.
-8. Finalizar el cutover solo después de la aceptación.
+1. Start the freeze and command bridge.
+2. Confirm the backup, healthy replication, and absence of lag.
+3. Stop services that generate writes.
+4. Launch the cutover instance.
+5. Validate the system, integrations, monitoring, and reconciliation.
+6. Shift traffic and DNS according to the approved TTL.
+7. Observe during the stabilization window.
+8. Finalize cutover only after acceptance.
 
-Los criterios go/no-go y el límite temporal de rollback se definen en [`10-plan-de-cutover.md`](10-plan-de-cutover.md).
+Go/no-go criteria and the rollback time limit are defined in [`10-plan-de-cutover.md`](10-plan-de-cutover.md).
 
-La operación completa de source servers, applications, waves, launch history, connectors e import/export se documenta en [`11-operacion-aws-transform-mgn.md`](11-operacion-aws-transform-mgn.md).
+Complete operations for source servers, applications, waves, launch history, connectors, and import/export are documented in [`11-operacion-aws-transform-mgn.md`](11-operacion-aws-transform-mgn.md).
 
-## Reversa
+## Rollback
 
-La reversa se ejecuta antes de finalizar MGN: detener escrituras en el destino, restaurar el enrutamiento, iniciar la fuente, validar integridad y documentar diferencias. El detalle de reconciliación depende de las transacciones aceptadas durante la ventana.
+Rollback is performed before finalizing MGN: stop writes at the target, restore routing, start the source, validate integrity, and document differences. Reconciliation detail depends on transactions accepted during the window.

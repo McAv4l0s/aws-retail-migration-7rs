@@ -1,28 +1,27 @@
-# Riesgos y RACI
+# Risks and RACI
 
-## Registro de riesgos
+## Risk register
 
-| ID | Riesgo | Prob. | Impacto | Mitigación | Propietario |
+| ID | Risk | Probability | Impact | Mitigation | Owner |
 |---|---|---:|---:|---|---|
-| R-01 | Dependencia no descubierta | 3 | 5 | Telemetría, entrevistas y prueba de ola | Application Owner |
-| R-02 | Inconsistencia de inventario | 3 | 5 | CDC/reconciliación y freeze | Data Owner |
-| R-03 | Costo superior al business case | 3 | 4 | Budgets, rightsizing y revisión semanal | FinOps |
-| R-04 | Acceso excesivo durante migración | 2 | 5 | Roles temporales y auditoría | Security Owner |
-| R-05 | Cutover en periodo comercial crítico | 2 | 5 | Calendario de blackout y go/no-go | Business Owner |
-| R-06 | Licencia no portable | 3 | 4 | Validación contractual previa | Procurement |
+| R-01 | Undiscovered dependency | 3 | 5 | Telemetry, interviews, and wave testing | Application Owner |
+| R-02 | Inventory inconsistency | 3 | 5 | CDC/reconciliation and freeze | Data Owner |
+| R-03 | Cost above the business case | 3 | 4 | Budgets, rightsizing, and weekly review | FinOps |
+| R-04 | Excessive access during migration | 2 | 5 | Temporary roles and auditing | Security Owner |
+| R-05 | Cutover during a critical commercial period | 2 | 5 | Blackout calendar and go/no-go | Business Owner |
+| R-06 | Non-portable license | 3 | 4 | Prior contractual validation | Procurement |
 
-Escala: 1 bajo, 5 alto. Los riesgos con producto probabilidad × impacto ≥ 12 requieren plan y aceptación ejecutiva.
+Scale: 1 low, 5 high. Risks with probability × impact ≥ 12 require a plan and executive acceptance.
 
-## RACI resumido
+## Summary RACI
 
-| Actividad | Negocio | Programa | App | Plataforma | Seguridad | FinOps |
+| Activity | Business | Program | App | Platform | Security | FinOps |
 |---|---|---|---|---|---|---|
-| Aprobar alcance y KPI | A | R | C | C | C | C |
-| Clasificar 7 R | C | A | R | R | C | C |
-| Diseñar landing zone | I | A | C | R | R | C |
-| Aprobar cutover | A | R | R | R | C | I |
-| Aceptar riesgo | A | R | C | C | R | C |
-| Validar beneficios | A | R | C | I | I | R |
+| Approve scope and KPIs | A | R | C | C | C | C |
+| Classify 7 Rs | C | A | R | R | C | C |
+| Design landing zone | I | A | C | R | R | C |
+| Approve cutover | A | R | R | R | C | I |
+| Accept risk | A | R | C | C | R | C |
+| Validate benefits | A | R | C | I | I | R |
 
-R = responsable, A = accountable, C = consultado, I = informado.
-
+R = responsible, A = accountable, C = consulted, I = informed.
