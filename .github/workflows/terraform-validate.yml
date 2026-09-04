@@ -9,6 +9,7 @@ on:
     branches: [main, english-version]
     paths:
       - "infra/terraform/**"
+      - ".github/workflows/terraform-validate.yml"
 
 permissions:
   contents: read
